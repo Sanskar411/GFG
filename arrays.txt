@@ -1,0 +1,861 @@
+ 3rd Largest Element (My Approach)
+ ===================================================
+ int thirdLargest(int a[], int n)
+    {int largest=0;
+    int second=0;
+    int third =0;
+    for(int i=0;i<n;i++){
+	        if(a[i]>largest ){
+	             third=second;
+	             second=largest;
+	             largest=a[i];
+	        }
+	        else if(a[i]>second && a[i]!=largest){
+	            third = second;
+	            second=a[i];
+	           
+	        }
+	        else if(a[i]>third&& a[i]!=largest&& a[i]!=second)
+	        {third=a[i];}
+	        else 
+	        {third =second;}
+	 
+    }
+    
+     return  third;
+    }
+}
+
+
+
+GFG Approach---------
+
+ if (arr_size < 3) { 
+            System.out.printf(" Invalid Input "); 
+            return; 
+        } 
+  
+        // Initialize first, second and third Largest element 
+        int first = arr[0], second = Integer.MIN_VALUE, 
+                            third = Integer.MIN_VALUE; 
+  
+        // Traverse array elements to find the third Largest 
+        for (int i = 1; i < arr_size; i++) { 
+            /* If current element is greater than first, 
+        then update first, second and third */
+            if (arr[i] > first) { 
+                third = second; 
+                second = first; 
+                first = arr[i]; 
+            } /* If arr[i] is in between first and second */
+            else if (arr[i] > second) { 
+                third = second; 
+                second = arr[i]; 
+            } /* If arr[i] is in between second and third */
+            else if (arr[i] > third) { 
+                third = arr[i]; 
+            } 
+        } 
+
+
+        here what i did is that i initialized the largest variable as 0 instead of that i should  do is to initialize the largest variable as a[0] and second and third largest as Integer.min value..and we have to iterate the loop from i=1 
+========================================================
+
+Find MAX and 2nd max 
+GFG Approach
+
+class ArrayMax{
+    
+    // Function to find largest and second largest element in the array
+    public static ArrayList<Integer> largestAndSecondLargest(int sizeOfArray, int arr[])
+    {
+        
+        int max = Integer.MIN_VALUE;
+        int max2 = Integer.MIN_VALUE;
+        
+        // iterating through array and comparing
+        // current element with max
+        for(int i = 0;i<sizeOfArray; i++){
+            // if current element is greater than max
+            // then update the max
+            if(arr[i] > max){
+                max2 = max;
+                max = arr[i];
+            }
+            // else, if current element is greater than max2
+            // and is not equal to max, then assign max2 to the
+            // current element
+            else if(arr[i] > max2 && arr[i] != max){
+                max2 = arr[i];
+            }
+        }
+        
+        // if max2 has not been updated
+        // then assign it to -1
+        if(max2 == Integer.MIN_VALUE){
+            max2 = -1;
+        }
+        
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        res.add(max);
+        res.add(max2);
+        return res;
+        
+        MY Approach -----------
+
+     public static ArrayList<Integer> largestAndSecondLargest(int sizeOfArray, int arr[])
+    {
+        ArrayList<Integer>al=new ArrayList<>();
+        int largest=Integer.MIN_VALUE;
+        int second=Integer.MIN_VALUE;
+        for(int i=0;i<sizeOfArray;i++){
+            if(arr[i]>largest){
+                second=largest;
+                largest=arr[i];
+            }
+            else if(arr[i]>second && arr[i]!=largest){
+                second=arr[i];
+            }
+            al.add(largest);
+            al.add(second);
+        
+        }
+       return al;
+    }
+1)if u want to return arraylist then first make an arraylist and add the elements and then return 
+2)here in this question it is also given that if second largest is not updated then update with -1 then 
+  we have to  this if(second == Integer.MIN_VALUE){
+            second = -1;
+        }
+  
+    ==============================================================================
+    ROTATE ARRAY MY Approach------
+    class Solution
+{
+    static void rotateArr(int arr[], int d, int n)
+    {   
+       reverse(arr, 0, d-1);
+       reverse(arr, d, n-1);
+       reverse(arr, 0, n-1);
+    }  
+     static void reverse(int arr[], int start, int end){
+            while(start<end){
+                int temp = arr[start];
+                arr[start]=arr[end];
+                arr[end]=arr[start];
+                start++;
+                end--;
+            }
+             
+        }
+    
+}
+
+gfg Approach-----------
+class Solution
+{
+    static void rvereseArray(int arr[], int start, int end) 
+    { 
+        int temp; 
+        while (start < end) { 
+            temp = arr[start]; 
+            arr[start] = arr[end]; 
+            arr[end] = temp; 
+            start++; 
+            end--; 
+        } 
+    }
+    static void rotateArr(int arr[], int d, int n)
+    {
+        // reverse first d elements
+        rvereseArray(arr, 0, d-1);
+
+        // now reverse the last d elements
+        rvereseArray(arr, d, n - 1); 
+
+        // now reverse the whole array
+        rvereseArray(arr, 0, n - 1); 
+    }
+}
+====================================================================================
+
+SUBARRAY WITH SUM(+ve integers)  MY APPROACH----------
+
+static ArrayList<Integer> subarraySum(int n, int s, int[] m) {
+        
+        ArrayList<Integer> al = new ArrayList<>();
+        int currsum=0;
+        int j=0;
+        int k=0;
+        int i=Integer.MIN_VALUE;
+        for( i=0;i<n;i++){
+            if(currsum<s){
+                currsum+=m[i];
+            }
+            else if(currsum==s){
+                 k =i;
+            }
+            else if (currsum>s){
+                currsum=currsum-m[j];
+                j++;
+            }
+        }
+        if(currsum!=s){
+            currsum = -1;
+        }
+        al.add(j);
+        al.add(i);
+        return al;
+    }
+}
+
+GFG APPROACH------------------
+MATHOD - 01---
+TIME COMPLEXITY= O(n)
+ int subArraySum(int arr[], int n, int sum) 
+    { 
+        int curr_sum = arr[0], start = 0, i; 
+  
+        // Pick a starting point 
+        for (i = 1; i <= n; i++) { 
+            // If curr_sum exceeds the sum, 
+            // then remove the starting elements 
+            while (curr_sum > sum && start < i - 1) { 
+                curr_sum = curr_sum - arr[start]; 
+                start++; 
+            } 
+  
+            // If curr_sum becomes equal to sum, 
+            // then return true 
+            if (curr_sum == sum) { 
+                int p = i - 1; 
+                System.out.println( 
+                    "Sum found between indexes " + start 
+                    + " and " + p); 
+                return 1; 
+            } 
+  
+            // Add this element to curr_sum 
+            if (i < n) 
+                curr_sum = curr_sum + arr[i]; 
+        } 
+  
+        System.out.println("No subarray found"); 
+        return 0; 
+    } 
+  
+    public static void main(String[] args) 
+    { 
+        SubarraySum arraysum = new SubarraySum(); 
+        int arr[] = { 15, 2, 4, 8, 9, 5, 10, 23 }; 
+        int n = arr.length; 
+        int sum = 23; 
+        arraysum.subArraySum(arr, n, sum); 
+    } 
+} 
+METHOD - 02------
+TIME COMPLEXITY = O(n^2)
+int subArraySum(int arr[], int n, int sum) 
+    { 
+        int curr_sum, i, j; 
+  
+        // Pick a starting point 
+        for (i = 0; i < n; i++) { 
+            curr_sum = arr[i]; 
+  
+            // try all subarrays starting with 'i' 
+            for (j = i + 1; j <= n; j++) { 
+                if (curr_sum == sum) { 
+                    int p = j - 1; 
+                    System.out.println( 
+                        "Sum found between indexes " + i 
+                        + " and " + p); 
+                    return 1; 
+                } 
+                if (curr_sum > sum || j == n) 
+                    break; 
+                curr_sum = curr_sum + arr[j]; 
+            } 
+        } 
+  
+        System.out.println("No subarray found"); 
+        return 0; 
+    } 
+  
+    public static void main(String[] args) 
+    { 
+        SubarraySum arraysum = new SubarraySum(); 
+        int arr[] = { 15, 2, 4, 8, 9, 5, 10, 23 }; 
+        int n = arr.length; 
+        int sum = 23; 
+        arraysum.subArraySum(arr, n, sum); 
+    } 
+} 
+
+METHOD - 03
+
+class Subarray{
+    static ArrayList<Integer> subarraySum(int n, int s, int[] m) {
+        int first = 0;
+        int last = 0;
+
+        long result = m[first];
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        while (result != s) {
+            if (result > s) {
+                if (first == last) {
+                    last++;
+                    first++;
+                    if (last >= n) break;
+                    result = m[first];
+                } else {
+                    result -= m[first];
+                    first++;
+                }
+            } else {
+                last++;
+                if (last < n) {
+                    result += m[last];
+                } else {
+                    break;
+                }
+            }
+        }
+
+        if (result != s) {
+            res.add(-1);
+        } else {
+            res.add(first + 1);
+            res.add(last + 1);
+            
+        }
+        return res;    
+    }
+}
+
+  ========================================================================
+
+  WAVE ARRAY MY APPROACH-------
+  public static void convertToWave(int arr[], int n){
+        int i=0;
+        int temp=0;
+        if(n%2==0){
+            while(i<n){
+                 temp= arr[i];
+                arr[i]=arr[i+1];
+                arr[i+1]=temp;
+                i+=2;
+            }
+        }
+             while(i<n-1){
+                 temp= arr[i];
+                arr[i]=arr[i+1];
+                arr[i+1]=temp;
+                i+=2;
+             } 
+        
+    }
+    
+
+}
+*************My approach was completely correct....***************
+
+GFG Approach----------------
+class Wave{
+    
+    public static void swap(int arr[], int x, int y){
+        int tmp = arr[x];
+        arr[x] = arr[y];
+        arr[y] = tmp;
+    }
+    
+    public static void convertToWave(int arr[], int n){
+        
+        // just iterating over the array and swapping the elements
+        for(int i=0;i<n-1;i=i+2){
+		        swap(arr, i, i+1);
+		    }
+        return;
+    }
+    
+}
+
+==========================================================================
+
+EQUILIBRIUM POINT MY APPROACH-----------------
+
+public static int equilibriumPoint(long arr[], int n) {
+        int sum=0; 
+        int leftsum=0;
+        int j=Integer.MIN_VALUE;
+        for( int i=0;i<n;i++){
+            sum+=arr[i];
+        }
+        for( j=0;j<n;j++){
+            if(n==1){
+                return 1;
+            }
+            sum-=arr[j];
+            if(sum==leftsum)
+                return j+1;
+            leftsum+=arr[j];
+        }
+        return -1;
+    }
+}
+*****MY APPROACH WAS RIGHT **********
+GFG APPROACH --------------------------
+
+class EquilibriumPoint {
+
+    public static int equilibriumPoint(long a[], int n) {
+
+        // Sum of all array elements
+        long sum = 0;
+        for (int i = 0; i < n; i++) 
+           sum += a[i];
+
+        // sum2 is used to store prefix sum
+        long sum2 = 0;
+        int ans = -1;
+
+        for (int i = 0; i < n; i++) {
+            
+            // Update suffix sum
+            sum = sum - a[i];
+            
+            // Check if suffix and prefix 
+            // sums are same
+            if (sum2 == sum) {
+                return (i + 1);
+            }
+            
+            // Update prefix sum
+            sum2 = sum2 + a[i];
+        }
+        return -1;
+    }
+}
+1) just u need to increment to j+1 from j and then return
+=============================================================================
+Remove duplicates in small prime array
+GFG Approach ---------
+class Solution
+{
+    ArrayList<Integer> removeDuplicate(int arr[], int n)
+    {
+        int dp[] = new int[100];
+        ArrayList<Integer> v = new ArrayList<Integer>();
+        for(int i=0; i<n; i++)
+        {
+            if(dp[arr[i]]==0)
+            {
+            dp[arr[i]]=1;
+            v.add(arr[i]);       
+            }
+        }
+        return v;
+    }
+}
+class GFG { 
+    static int[] removeDups(int[] vect) 
+    { 
+        int res_ind = 1; 
+  
+        // Loop invariant: Elements from vect[0] 
+        // to vect[res_ind-1] are unique. 
+        for (int i = 1; i < vect.length; i++) { 
+            int j; 
+            for (j = 0; j < i; j++) 
+                if (vect[i] == vect[j]) 
+                    break; 
+            if (j == i) 
+                vect[res_ind++] = vect[i]; 
+        } 
+  
+        // Removes elements from vect[res_ind] 
+        // to vect[end] 
+        int[] new_arr = new int[res_ind]; 
+        for (int i = 0; i < res_ind; i++) 
+            new_arr[i] = vect[i]; 
+  
+        return new_arr; 
+    } 
+
+
+MY Approach------------
+class Solution
+{
+    int[] removeDuplicate(int arr[], int n)
+    {
+        HashSet<Integer>hs=new HashSet<Integer>();
+        for(int i=0;i<n;i++){
+            hs.add(arr[i]);
+        }
+        int[] arr1=hs.toArray();
+        return arr1; 
+    }
+}
+================================================================
+
+UNION OF TWO SORTED ARRAYS
+
+MY APPROACH ----------
+class Union
+{
+    
+    public static ArrayList<Integer> findUnion(int arr1[], int arr2[], int n, int m)
+    {
+        HashSet<Integer> hs= new HashSet<>();
+        for(int i =0;i<n;i++){
+            hs.add(arr1[i]);
+        }
+        for(int j =0;j<m;j++){
+            hs.add(arr2[j]);
+        }
+        
+       ArrayList<Integer> list = new ArrayList<Integer>(hs);
+      ArrayList<Integer> ob1=new ArrayList<Integer>();
+        for(int i : list)
+            ob1.add(i);
+        Collections.sort(ob1);
+        return ob1;
+    }
+}
+*********my approach was completely correct ********
+1) Just remember one thing if u want to sort arraylist and we know that it will return void so its better create a new arraylist and assign the other list into this just by iterating and then return the new list
+===================================================================
+
+INTERSECTION OF TWO ARRAYS
+ MY APPROACH --------------
+ public static int NumberofElementsInIntersection (int a[], int b[] , int n, int m)
+{int count =0;
+    HashSet<Integer> hs =new HashSet<Integer>();
+    for(int i=0;i<n;i++){
+        hs.add(a[i]);
+    }
+     HashSet<Integer> hs1 =new HashSet<Integer>();
+    for(int j=0;j<m;j++){
+        if(hs.contains(b[j])){
+            count++;
+            hs.remove(b[j]);
+        }
+    }
+    return count;
+}
+********My Approach is correct*********
+
+GFG APPROACH ---------------------
+
+public static int NumberofElementsInIntersection (int a[], int b[] , int n, int m)
+    {
+        //Creating an HashSet
+    	HashSet<Integer> s1=new HashSet<>();
+    	
+    	//Initalizing the count of common 
+    	//elements to 0
+        int count = 0;
+        
+        // add the elements of a[] to set s1 
+    	for(int i=0;i<n;i++)
+    		s1.add(a[i]);
+    
+    	for(int i=0;i<m;i++)
+    	{
+    	    // if element at b[i] already exists in set
+    		if(s1.contains(b[i])){
+    		    
+    		    // remove element so that is can not be compared again 
+    		    s1.remove(b[i]);
+    		    
+    		    // increase count by 1 
+    		    count++;
+    		}
+    	}
+    	
+    	//returning the total count
+    	//of common elements
+    	return count;
+    }
+==================================================================
+Binary Array Sorting 
+ GFG Approach ----------
+ 1) class Solution 
+{ 
+	static int[] SortBinaryArray(int arr[], int n) 
+	{ 
+		int count =0;
+		for (int i = 0; i < n; i++) { 
+			if (arr[i] == 0) 
+				count++; 
+		} 
+
+		for (int i = 0; i < count; i++) 
+			arr[i] = 0; 
+
+		for (int i = count; i < n; i++) 
+			arr[i] = 1; 
+
+		return arr;
+	} 
+} 
+
+2) static void sortBinaryArray(int a[], int n) 
+    { 
+        int j = -1; 
+        for (int i = 0; i < n; i++) { 
+  
+            // if number is smaller than 1 
+            // then swap it with j-th number 
+            if (a[i] < 1) { 
+                j++; 
+                int temp = a[j]; 
+                a[j] = a[i]; 
+                a[i] = temp; 
+            } 
+        } 
+    } 
+=========================================================
+
+FREQUENCY OF ELEMENT IN ARRAY 
+
+GFG APPROACH --------------
+Algorithm 1: O(n^2) time and O(1) space
+Use 2 loops.
+1. Outer loop runs from i = 1 to n.
+2. Inner loop calculates the count of i in the input array.
+3. Print the count of i when inner loop ends.
+
+1. Reduce all elements by 1 so that the elements are converted in the range 0 to n-1.
+2. Traverse the input array and for i = 0 to n-1, add n to element at index (input[i]%n). After all the elements are completed, element at index i will be increment by n*k where k is the number of times i occurs in the array.
+3. Finally, print counts of elements. Count of i+1 will be input[i]/n.
+Reason:
+Element at index i will be equal to input[i] + n*k where k is the number of times i occurs in the array.
+On dividing by n, we get: (input[i] + n*k)/n = input[i]/n + (n*k)/n = 0 + k = k = the number of times i occurs in the array
+As initially, all elements were reduced by 1, so this is count of i+1.
+4. Traverse input array once and set input[i] = input[i]%n+1 to get original array.
+
+xample:
+Input Array: [2, 3, 3, 2, 5]
+n: 5
+After step #1, array will be:
+[1, 2, 2, 1, 4]
+Step #2:
+i = 0: Set input[input[0]%5] = input[input[0]%5] + 5
+                             = input[1%5] + 5
+                             = input[1] + 5  
+                             = 2 + 5
+                             = 7
+Array: [1, 7, 2, 1, 4]
+
+i = 1: Set input[input[1]%5] = input[input[1]%5] + 5
+                             = input[7%5] + 5
+                             = input[2] + 5
+                             = 2 + 5
+                             = 7
+Array: [1, 7, 7, 1, 4]
+
+i = 2: Set input[input[2]%5] = input[input[2]%5] + 5
+                             = input[7%5] + 5
+                             = input[2] + 5
+                             = 7 + 5
+                             = 12
+Array: [1, 7, 12, 1, 4]
+
+i = 3: Set input[input[3]%5] = input[input[3]%5] + 5
+                             = input[1%5] + 5
+                             = input[1] + 5
+                             = 7 + 5
+                             = 12
+Array: [1, 12, 12, 1, 4]
+
+i = 4: Set input[input[4]%5] = input[input[4]%5] + 5
+                             = input[4%5] + 5
+                             = input[4] + 5
+                             = 4 + 5
+                             = 9
+Array: [1, 12, 12, 1, 9]
+
+After step #2: Input Array = [1, 12, 12, 1, 9]
+
+Step #3: Print all elements:
+(i+1)   input[i]/n
+1        0
+2        2
+3        2
+4        0
+5        1
+
+Step #4: Get back original array by setting input[i] = input[i]%n+1
+i = 0: Set input[0] = input[0]%5+1
+                    = 1%5+1
+                    = 1 + 1
+                    = 2
+i = 1: Set input[1] = input[1]%5+1
+                    = 12%5+1
+                    = 2 + 1
+                    = 3
+i = 2: Set input[2] = input[2]%5+1
+                    = 12%5+1
+                    = 2 + 1
+                    = 3
+i = 3: Set input[3] = input[3]%5+1
+                    = 1%5+1
+                    = 1 + 1
+                    = 2
+i = 4: Set input[4] = input[4]%5+1
+                    = 4%5+1
+                    = 4 + 1
+                    = 5
+Hence original array is obtained as [2, 3, 3, 2, 5]
+
+
+class Frequency{
+    public static void frequencycount(int arr[], int n)
+    {
+        for (int j =0; j<n; j++) 
+            arr[j] = arr[j]-1; 
+        
+        // storing the frequency of elements using mathematical formula
+        for (int i=0; i<n; i++) 
+            arr[arr[i]%n] = arr[arr[i]%n] + n; 
+
+        for (int i =0; i<n; i++) 
+            arr[i] = (arr[i]/n);
+    }
+}
+===============================================================
+MAX PATH SUM 
+
+GFG APPROACH--------------
+int maxPathSum(int ar1[], int ar2[])
+	{
+		int i = 0, j = 0;
+		int result = 0, sum1 = 0, sum2 = 0;
+		
+		while(i < ar1.length && j<ar2.length)
+		{
+			if(ar1[i] < ar2[j])
+				sum1 += ar1[i++];
+				
+			else if(ar1[i] > ar2[j])
+				sum2 += ar2[j++];
+				
+			else
+			{
+				result += max(sum1, sum2);
+				
+				sum1 = 0; sum2 = 0;
+				
+				while(i < ar1.length && j < ar2.length && ar1[i] == ar2[j])
+				{
+					result = result + ar1[i++];
+					j++;
+				}
+			}
+		}
+		
+		while(i < ar1.length)
+			sum1 = sum1 + ar1[i++];
+			
+		while(j < ar2.length)
+			sum2 = sum2 + ar2[j++];
+			
+		result += max(sum1, sum2);
+		
+		return result;
+	}
+}
+===========================================================
+PRODUCT ARRAY PUZZLE 
+
+GFG APPROACH----------
+class ProductArray { 
+    /* Function to print product array  
+    for a given array arr[] of size n */
+    void productArray(int arr[], int n) 
+    { 
+  
+        // Base case 
+        if (n == 1) { 
+            System.out.print(0); 
+            return; 
+        } 
+        // Initialize memory to all arrays 
+        int left[] = new int[n]; 
+        int right[] = new int[n]; 
+        int prod[] = new int[n]; 
+  
+        int i, j; 
+  
+        /* Left most element of left array  
+is always 1 */
+        left[0] = 1; 
+  
+        /* Rightmost most element of right  
+array is always 1 */
+        right[n - 1] = 1; 
+  
+        /* Construct the left array */
+        for (i = 1; i < n; i++) 
+            left[i] = arr[i - 1] * left[i - 1]; 
+  
+        /* Construct the right array */
+        for (j = n - 2; j >= 0; j--) 
+            right[j] = arr[j + 1] * right[j + 1]; 
+  
+        /* Construct the product array using  
+        left[] and right[] */
+        for (i = 0; i < n; i++) 
+            prod[i] = left[i] * right[i]; 
+  
+        /* print the constructed prod array */
+        for (i = 0; i < n; i++) 
+            System.out.print(prod[i] + " "); 
+  
+        return; 
+    } 
+  
+    /* Driver program to test the aboe function */
+    public static void main(String[] args) 
+    { 
+        ProductArray pa = new ProductArray(); 
+        int arr[] = { 10, 3, 5, 6, 2 }; 
+        int n = arr.length; 
+        System.out.println("The product array is : "); 
+        pa.productArray(arr, n); 
+    } 
+} 
+MY APPROACH------------
+class Solution 
+{ 
+	public static long[] productExceptSelf(int arr[], int n) 
+	{ int mul=arr[0];
+        long[] dp = new long[n];
+        for(int i=1;i<n;i++){
+            if(n>0 && n<2){
+                dp[i]=1;
+            }
+            mul=mul*arr[i];
+        }
+        
+        for(int i=0;i<n;i++){
+             if(arr[i]==0 && n==2){
+                 int temp = arr[i-1];
+                 arr[i-1]=arr[i];
+                 arr[i]=temp;
+                 dp[i]=arr[i];
+             }
+             if(n>0 && n<2){
+                dp[i]=1;
+            }
+            dp[i]=(mul/arr[i]);
+            
+        }
+        
+        return dp;
+        
+	} 
+} 
+
+===========================================================

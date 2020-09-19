@@ -1,0 +1,139 @@
+SEARCH ELEMENT IN SORTED MATRIX( GFG APPPROACH)
+=================================================================
+class Solution 
+{ 
+	static boolean search(int matrix[][], int n, int m, int x) 
+	{  
+	    int i=0;
+	    int j=m-1;
+	   
+	    while(i<n && j>=0){
+	        if(matrix[i][j]==x)
+	        return true;
+	        else if(matrix[i][j]>x)
+	        j--;
+	        else if(matrix[i][j]<x)
+	        i++;
+	        
+	    }
+	    return false;
+	} 
+} 
+=====================================================================
+SPIRALLY TRAVERSING THE MATRIX(it is almost same as spiral traversal just u need to remove the while loop)
+
+MY AND GFG APPROACH--
+class Solution{
+    static ArrayList<Integer> spirallyTraverse(int matrix[][], int r, int c)
+    {
+        ArrayList<Integer>al= new ArrayList<Integer>();
+        int lastrow = r-1;
+        int lastcol = c-1;
+        int i=0;
+        int k=0;
+        int l=0;
+        while(l<=lastcol && k<=lastrow){
+            for(i=l;i<=lastcol;i++){
+                al.add(matrix[k][i]);
+            }
+            k++;
+            for(i=k;i<=lastrow;i++){
+                al.add(matrix[i][lastcol]);
+            }
+            lastcol--;
+            if(k<=lastrow){
+            for(i=lastcol;i>=l;i--){
+                al.add(matrix[lastrow][i]);
+            }
+            lastrow--;
+        }
+            if(l<=lastcol){
+                for(i=lastrow;i>=k;i--){
+                    al.add(matrix[i][l]);
+                }
+                l++;
+            }
+        }
+        return al;
+    }
+}
+=============================================================
+BOUNDARY TRAVERSAL OF MATRIX
+ MY APPROACH----
+ class Solution{
+    static ArrayList<Integer> boundaryTraversal(int matrix[][], int n, int m)
+    {
+         ArrayList<Integer>al= new ArrayList<Integer>();
+        int lastrow = n-1;
+        int lastcol = m-1;
+        int i=0;
+        int k=0;
+        int l=0;
+       
+            for(i=l;i<=lastcol;i++){
+                al.add(matrix[k][i]);
+            }
+            k++;
+            for(i=k;i<=lastrow;i++){
+                al.add(matrix[i][lastcol]);
+            }
+            lastcol--;
+            if(k<=lastrow){
+            for(i=lastcol;i>=l;i--){
+                al.add(matrix[lastrow][i]);
+            }
+            lastrow--;
+        }
+            if(l<=lastcol){
+                for(i=lastrow;i>=k;i--){
+                    al.add(matrix[i][l]);
+                }
+                l++;
+            }
+        
+        return al;
+    }
+}
+===========================================================
+SPIRALLY TRAVEELING AN COUNTING THE NEXT ELEMENT 
+
+MY APPROACH ANF TAKEN IDEA FROM GFG ---
+int findK(int A[][], int n, int m, int k)
+    {
+	  int lastrow = n-1;
+        int lastcol = m-1;
+        int i=0;
+        int s=0;
+        int l=0;
+        int count=0;
+        while(l<=lastcol && s<=lastrow){
+            for(i=l;i<=lastcol;i++){
+                
+                if(++count==k)
+                return A[s][i];
+            }
+            s++;
+            for(i=s;i<=lastrow;i++){
+                if(++count==k)
+                return A[i][lastcol];
+            }
+            lastcol--;
+            if(s<=lastrow){
+            for(i=lastcol;i>=l;i--){
+                if(++count==k)
+                return A[lastrow][i];
+            }
+            lastrow--;
+        }
+            if(l<=lastcol){
+                for(i=lastrow;i>=s;i--){
+                    if(++count==k)
+                    return A[i][l];
+                }
+                l++;
+            }
+        }
+        return count;
+    }
+}
+=====================================================

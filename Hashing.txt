@@ -1,0 +1,70 @@
+public boolean keypair(int[] A, int N, int X)
+    {   Arrays.sort(A);
+        for(int i=0;i<N;i++){
+            for(int j=1+i;j<N;j++){
+                if(A[i]+A[j]==X)
+                return true;
+            }
+        }
+        return false;
+    }
+    it fails some of test case
+MY APPROACH ------------
+    public boolean keypair(int[] A, int N, int X)
+    {  Arrays.sort(A);
+        int start=0;
+        int end=N-1;
+        while(start<end){
+        if (A[start]+A[end]==X)
+           return true;
+        else if (A[start]+A[end] < X)
+            start++;
+        else
+           end--;
+        }
+       
+        return false;
+    }
+}
+********my approch is correct************
+
+GFG APPROACH(Hashing approach)
+ static void printpairs(int arr[], int sum) 
+    { 
+        HashSet<Integer> s = new HashSet<Integer>(); 
+        for (int i = 0; i < arr.length; ++i) { 
+            int temp = sum - arr[i]; 
+  
+            // checking for condition 
+            if (s.contains(temp)) { 
+                System.out.println( 
+                    "Pair with given sum "
+                    + sum + " is (" + arr[i] 
+                    + ", " + temp + ")"); 
+            } 
+            s.add(arr[i]); 
+        } 
+    } 
+========================================================
+POSITIVE NEGATIVE PAIR 
+MY APPROACH---------
+class Sol
+{
+    public static ArrayList<Integer>findPairs(int arr[], int n) 
+    { ArrayList<Integer>al = new ArrayList<Integer>();
+      
+    	for(int i =0;i<n-1;i++){
+    	    for(int j=i+1;j<n;j++){
+    	        if(arr[i]==-arr[j]){
+    	            al.add(arr[i]);
+    	            al.add(-arr[i]);
+    	        }
+    	    }
+    	}
+    	
+    	return al;
+    }
+}
+ 
+GFG APPROACH---------    
+
