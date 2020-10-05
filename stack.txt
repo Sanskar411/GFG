@@ -1,0 +1,189 @@
+EVALUATION OF POSTFIX
+==================================================
+class solve{
+    public static int evaluatePostFix(String exp){
+        Stack<Integer>s = new Stack<>();
+        for(int i =0;i<exp.length();i++){
+          char c = exp.charAt(i);
+          if(Character.isDigit(c))
+            s.push(c-'0');
+          else
+           {
+               int val1 = s.pop();
+               int val2=  s.pop();
+           
+         switch(c){
+             case '+':
+                 s.push(val2 + val1);
+                 break;
+             case '-':
+                 s.push(val2-val1);
+                 break;
+             case '*':
+                 s.push(val2*val1);
+                 break;
+             case '/':
+                 s.push(val2/val1);
+                 break;
+         }
+           }
+        }
+         return s.pop();
+        }
+    
+}=====================================================================
+IMPLEMENT TWO STACKS USING ONE ARRAY
+GFG APPROACH
+class Stacks
+{
+    // sq is the object of class TwoStack
+    /* The method push to push element into the stack 2 */
+    void push1(int x, TwoStack sq)
+    { 
+        if(sq.top1<sq.top2-1){
+            sq.top1++;
+            sq.arr[sq.top1]=x;
+        }
+    }
+
+    /* The method push to push element into the stack 2*/
+    void push2(int x, TwoStack sq)
+    {
+         if(sq.top1<sq.top2-1){
+            sq.top2--;
+            sq.arr[sq.top2]=x;
+        }
+    }
+
+    /* The method pop to pop element from the stack 1 */
+    //Return the popped element
+    int pop1(TwoStack sq)
+    {  int x;
+        if(sq.top1>=0){
+           x=sq.arr[sq.top1];
+           sq.top1--;
+        }
+        else
+       { return -1;}
+         return x;
+    }
+
+    /* The method pop to pop element from the stack 2 */
+    //Return the popper element
+    int pop2(TwoStack sq)
+    {
+        int x;
+        if(sq.top2<sq.size){
+           x=sq.arr[sq.top2];
+           sq.top2++;
+        }
+        else
+       { return -1;}
+         return x;
+    }
+}
+=====================================================================
+STOCK SPAN PROBLEM
+GFG APPROACH
+class solve{
+    
+    // Function to calculate span
+    // price[]: input array
+    public static int[] calculateSpan(int price[], int n)
+    {
+        Stack<Integer>s=new Stack<>();
+        s.push(0);
+        int[] arr = new int[n];
+        arr[0]=1;
+        for(int i=1;i<n;i++){
+        while(!s.isEmpty() && price[s.peek()]<=price[i])
+        s.pop();
+            
+        arr[i]=s.empty()?i+1:i-s.peek();
+          s.push(i);  
+        }
+        return arr;
+    }
+    
+}
+=======================================================================
+NEXT GREATER ELEMENT
+GFG APPROACH
+class solve{
+    public static long[] nextLargerElement(long[] arr, int n) { 
+        long[] arr1 = new long[n];
+        Stack<Long>s= new Stack<>();
+        for(int i = n-1;i>=0;i--){
+            while(!s.empty() && s.peek()<=arr[i])
+            {s.pop();}
+            if(s.empty())
+            { arr1[i]=-1;}
+             else
+             {arr1[i]=s.peek();}
+             s.push(arr[i]);
+        }
+        return arr1;
+    } 
+}
+========================================================================
+MINIMUM ELEMENT USING O(1) SPACE
+GFG APPROACH
+
+class GfG
+{
+    int minEle;
+    Stack<Integer> s;
+     GfG()
+	{
+		s = new Stack<Integer>();
+	}
+    /*returns min element from stack*/
+    int getMin()
+    {
+     if (s.isEmpty())
+      return -1;
+       return minEle;
+    }
+    
+    /*returns poped element from stack*/
+    int pop()
+    { 
+	  if(s.isEmpty())
+	  return -1; 
+	  int t = s.pop();
+	     if(t < minEle)
+		{
+			int k = minEle;
+			minEle = 2*minEle - t;
+			return k;
+		}
+		else 
+		{
+			return t;
+		}
+	  
+    }
+
+    /*push element x into the stack*/
+    void push(int x)
+	{
+		
+		//System.out.println(s.peek());
+		if(s.isEmpty())
+		{
+			minEle = x;
+			s.push(x);
+			return ;
+		}
+		else if(x < minEle)
+			{
+				s.push(2*x - minEle);
+				minEle = x;
+			}
+			else
+			{
+				s.push(x);
+			}
+	}	
+}
+======================================================

@@ -1,0 +1,522 @@
+DETECT LOOP IN A LINKED LIST
+===================================================
+MY APPROACH IS CORRECT
+class Solution {
+    public static boolean detectLoop(Node head){
+        Node p = head;
+        Node q = head;
+        while(p!=null && q!=null && q.next!=null){
+            p=p.next;
+            q=q.next.next;
+            if(p==q)
+            return true;
+        }
+        return false;
+    }
+}
+******My approach is correct*********
+=====================================================
+REVERSE A LINKED LIST
+MY APPPROACH IS CORRECT
+class ReverseLL
+{
+    // This function should reverse linked list and return
+    // head of the modified linked list.
+    Node reverseList(Node head)
+    {
+        Node curr=head;
+        Node prev=null;
+        Node next=null;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+}
+======================================================
+MIDDLE ELEMENT OF LIST
+MY APPROACH IS CORRECT
+class Solution
+{
+    int getMiddle(Node head)
+    {
+         Node slow=head;
+         Node fast=head;
+         while(fast!=null && fast.next!=null){
+             slow=slow.next;
+             fast=fast.next.next;
+         }
+         return slow.data;
+    }
+}
+===========================================================
+DELETE MIDDLE OF LINKED LIST
+MY APPROACH IS CORRECT
+class Solution {
+    Node deleteMid(Node head) {
+        Node fast = head;
+        Node slow=head;
+        Node prev =null;
+        while(fast!=null && fast.next!=null){
+            fast=fast.next.next;
+            prev=slow;
+            slow=slow.next;
+        }
+       prev.next=slow.next;
+       return head;
+    }
+}
+=====================================================
+NTH NODE FROM END OF LINKED LIST 
+MY APPROACH IS RIGHT 
+class GfG
+{
+    // Function to find the nth node from end in the linked list
+    // head: head of the linked list
+    // n: nth node from end to find
+    int getNthFromLast(Node head, int n)
+    {
+        int count=0;
+        Node temp=head;
+        Node prev=null;
+        while(temp!=null){
+            count++;
+            temp=temp.next;
+        }
+        temp=head;
+        if(count<n)
+        return -1;
+        int pos=count-n+1;
+        for(int i=0;i<pos-1;i++){
+            temp=temp.next;
+        }
+        return temp.data;
+    }
+}
+==========================================================
+ linked list of 0s, 1s and 2s, sort it.
+MY APPROACH IS CORRECT
+class LinkedList
+{
+    static Node segregate(Node head)
+    {
+        int[] arr=new int[3];
+        Node temp =head;
+        int i=0;
+        while(temp!=null){
+            arr[temp.data]++;
+            temp=temp.next;
+        }
+        temp=head;
+        while(temp!=null){
+            if(arr[i]==0)
+            i++;
+            else{
+                temp.data=i;
+                arr[i]--;
+                temp=temp.next;
+            }
+        }
+        return head;
+    }
+}
+==============================================================
+ PAIRWISE SWAP ELEMENTS OF A LINKED LIST
+ MY APPROACH 
+ class Solution {
+    // Function to pairwise swap elements of a linked list.
+    // It should returns head of the modified list
+    public Node pairwiseSwap(Node head)
+    {
+        Node temp=head;
+        while(temp!=null && temp.next!=null){
+            int k = temp.next.data;
+            temp.next.data=temp.data;
+            temp.data=k;
+            temp=temp.next.next;
+        }
+        return head;
+    }
+}
+============================================================= 
+REMOVE DUPLICATES FROM UNSORTED LINKED LIST
+GFG APPROACH
+class GfG
+{
+    // Function to remove duplicates from the given linked list
+    public Node removeDuplicates(Node head) 
+    {
+         HashSet<Integer>hs = new HashSet<>();
+         Node temp=head;
+         Node prev=null;
+         while(temp!=null){
+             int k=temp.data;
+             if(hs.contains(k)){
+                 prev.next=temp.next;
+             }
+             else{
+                 hs.add(k);
+                 prev=temp;
+             }
+             temp=temp.next;
+         }
+         return head;
+    }
+}
+===============================================================
+INTERSECTION PT IN Y SHAPED LINK
+MY APPROACH
+class Intersect
+{
+    int intersectPoint(Node headA, Node headB)
+    {
+         HashSet<Node>hs=new HashSet<>();
+         Node temp1=headA;
+         Node temp2=headB;
+         while(temp1!=null){
+             hs.add(temp1);
+             temp1=temp1.next;
+         }
+         while(temp2!=null){
+             if(hs.contains(temp2))
+             return temp2.data;
+             
+             temp2=temp2.next;
+         }
+         return -1;
+    }
+}
+================================================================
+MERGE TWO SORTED LINKED LIST
+GFG APPROACH
+
+class LinkedList
+{
+    Node sortedMerge(Node headA, Node headB) {
+     Node hs =new Node(0);
+     Node head=hs;
+     while(headA!=null && headB!=null){
+         if(headA.data<headB.data){
+             hs.next=headA;
+             headA=headA.next;
+         }
+         else{
+             hs.next=headB;
+             headB=headB.next;
+         }
+         hs=hs.next;
+     }
+     if(headA!=null)
+     hs.next=headA;
+     else
+     hs.next=headB;
+     
+     return head.next;
+   } 
+}
+==================================================================
+ROTATE LINKED LIST 
+MY APPROACH IS CORRECT (USING HINT)
+class Rotate{
+    // This function should rotate list counter-
+    // clockwise by k and return head node
+    
+    public Node rotate(Node head, int k) {
+        int count =1;
+        Node temp_head=head;
+        Node temp=head;
+        Node tail=head;
+        while(tail.next!=null){
+            count++;
+            tail=tail.next;
+        }
+        if(count==k)
+        return head;
+        for(int i=0;i<k-1;i++){
+            temp=temp.next;
+        }
+        Node temp1=temp.next;
+        
+        temp.next=null;
+        tail.next=head;
+        head=temp1;
+        
+      return head;  
+    }
+}
+here we need to have 4 pointers start,kth node,k+1 node,tail
+========================================================================
+FIND THE LENGTH OF THE LOOP
+MY AND GFG APPROACH
+class Solution
+{
+    static int countNodesinLoop(Node head)
+    {  
+         Node slow=head;
+         Node fast=head;
+         while(slow!=null && fast!=null && fast.next!=null){
+             fast=fast.next.next;
+             slow=slow.next;
+             if(slow==fast){
+                 return countnodes(slow);
+             }
+         }
+         return 0;
+    }
+    static int countnodes(Node n){
+        int count=1;
+        Node temp = n;
+        while(temp.next!=n){
+            count++;
+            temp=temp.next;
+        }
+        return count;
+    }
+}
+===================================================================================
+INTERSECTION OF TWO LINKED LIST
+GFG APPROACH
+class Sol
+{
+
+    public static Node findIntersection(Node head1, Node head2)
+    {
+        Node p1=head1, p2=head2;
+        Node head=null, tail=null;
+        
+        while(p1!=null && p2!=null)
+            if(p1.data > p2.data)
+                // nodes dont match
+                // moving to next node in list with smaller node
+                p2 = p2.next;
+            
+            else if(p2.data > p1.data)
+                // nodes dont match
+                // moving to next node in list with smaller node
+                p1 = p1.next;
+            
+            else
+            {
+                // nodes match
+                
+                if(head==null)
+                    head = tail = new Node(p1.data);
+                    // creating new head for intersection list
+                else
+                {
+                    // appending new node at the end
+                    tail.next = new Node(p1.data);
+                    tail = tail.next;
+                }
+                p1 = p1.next;
+                p2 = p2.next;
+                // moving to next nodes in both lists
+            }
+        
+        return head;
+    }
+
+}
+===========================================================================
+LINKED LIST IS PALINDROME 
+GFG APPROACH
+class Palindrome
+{
+    // Function to check if linked list is palindrome
+    boolean isPalindrome(Node head) 
+    {
+       Node slow=head;
+       Node fast=head;
+       while(fast!=null && fast.next!=null){
+           fast=fast.next.next;
+           slow=slow.next;
+       }
+       slow=reverse(slow);
+       fast=head;
+       while(slow!=null)
+       {
+           if(slow.data!=fast.data)
+           {
+               return false;
+           }
+               fast=fast.next;
+               slow=slow.next;
+       }
+       return true;
+    }   
+    public static Node reverse(Node head){
+    Node prev =null;
+    Node curr=null;
+    Node temp=head;
+    while(temp!=null){
+        curr=temp.next;
+        temp.next=prev;
+        prev=temp;
+        temp=curr;
+    }
+    return prev;
+}
+}
+==================================================================    
+INTERSECTION OF TWO LINKED LISTS
+MY APPRAOCH WAS ALMOST CORRECT 
+class Sol
+{
+    public static Node findIntersection(Node head1, Node head2)
+    {   
+        HashSet<Integer>hs=new HashSet<>();
+        Node temp1 =head1;
+        Node temp2=head2;
+        while(temp2!=null){
+        hs.add(temp2.data);
+        temp2=temp2.next;}
+        Node head = null;
+        Node tail=null;
+        while(temp1!=null){
+            if(hs.contains(temp1.data)){
+                if(head==null)
+                {
+                    head=tail=new Node(temp1.data);
+                }
+                else{
+                    tail.next=new Node(temp1.data);
+                    tail=tail.next;
+                }
+            }
+            temp1=temp1.next;
+        }
+        return head;
+    }
+}
+===========================================================================
+REVERSE LINKED LIST I  GROUP OF SIZE K
+GFG APPROACH
+Class GfG
+{
+    public static Node reverse(Node node, int k)
+    {   Node prev=null;
+        Node temp=node;
+        Node curr=null;
+        int count=0;
+        while(count<k && temp!=null){
+        curr=temp.next;
+        temp.next=prev;
+        prev=temp;
+        temp=curr;
+        count++;
+        }
+         if(curr!=null){
+             node.next=reverse(curr,k);
+         }
+    return prev;
+    }
+}
+============================================================================
+DELETE WITHOUT HEAD POINTER
+MY APPROACH
+class GfG
+{
+    void deleteNode(Node node)
+    { Node temp=node;
+         int k=temp.next.data;
+         temp.next.data=temp.data;
+         temp.data=k;
+         
+         Node prev=null;
+          prev=temp;
+          temp=temp.next;
+          prev.next=temp.next;
+    }
+}
+==============================================================================
+DELETE KEYS IN A LINKED LIST
+MY APPROACH IS CORRECT
+class GfG
+{
+    public static Node deleteAllOccurances(Node head, int x)
+    {
+        Node temp=head;
+        Node head1=null;
+        Node tail=null;
+        while(temp!=null){
+            if(temp.data!=x){
+                if(head1==null){
+                    head1=tail=new Node(temp.data);
+                }
+                else{
+                    tail.next=new Node (temp.data);
+                    tail=tail.next;
+                }
+            }
+            temp=temp.next;
+        }
+        return head1;
+    }
+}
+============================================================================
+MERGE SORT IN LINKED LIST
+GFG APPROACH
+class LinkedList
+{
+    static Node mergeSort(Node head)
+    {
+        if(head == null || head.next == null)
+           return head;
+           
+        Node middle = getMiddle(head);
+        Node nextofmiddle = middle.next;
+        middle.next = null;
+        
+        Node left = mergeSort(head);
+        Node right = mergeSort(nextofmiddle);
+        Node sortedlist = sortedMerge(left, right);
+        return sortedlist;
+    }
+    public static Node sortedMerge(Node a, Node b)
+    {
+        Node result = null;
+        
+         if (a == null)
+            return b;
+        if (b == null)
+            return a;
+ 
+       
+        if (a.data <= b.data) 
+        {
+            result = a;
+            result.next = sortedMerge(a.next, b);
+        } 
+        else
+        {
+            result = b;
+            result.next = sortedMerge(a, b.next);
+        }
+        return result;
+    }
+     public static Node getMiddle(Node h)
+    {
+        if (h == null)
+            return h;
+        Node fastptr = h.next;
+        Node slowptr = h;
+         
+        
+        while (fastptr != null)
+        {
+            fastptr = fastptr.next;
+            if(fastptr!=null)
+            {
+                slowptr = slowptr.next;
+                fastptr=fastptr.next;
+            }
+        }
+        return slowptr;
+    }
+}
+===============================================================
+
+
